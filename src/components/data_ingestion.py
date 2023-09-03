@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from src.logger import logging  # Import custom logging configuration
 from sklearn.model_selection import train_test_split
 from src.exception import CustomException  # Import custom exception class
+from src.components.data_transformation import DataTransformation
 
 # Define a dataclass to hold configuration paths
 @dataclass
@@ -59,4 +60,7 @@ if __name__ == "__main__":
     obj = DataIngestion()
     
     # Call the data ingestion method to initiate the process
-    obj.dataIngestionInitiate()
+    train, test = obj.dataIngestionInitiate()
+    
+    datatransform = DataTransformation()
+    datatransform.initiate_data_transformation(train, test)
