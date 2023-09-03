@@ -10,7 +10,7 @@ from dataclasses import dataclass
 
 from src.exception import CustomException
 from src.logger import logging
-from utils import save_obj
+from src.utils import save_obj
 
 # Define a data class to store configuration parameters
 @dataclass
@@ -37,7 +37,7 @@ class DataTransformation:
             num_pipeline = Pipeline(
                 steps=[
                     ("imputer", SimpleImputer(strategy="median")),
-                    ('scaler', StandardScaler())
+                    ('scaler', StandardScaler(with_mean=False))
                 ]
             )
 
@@ -48,7 +48,7 @@ class DataTransformation:
                 steps=[
                     ("imputer", SimpleImputer(strategy='most_frequent')),
                     ("encoding", OneHotEncoder()),
-                    ("scalar", StandardScaler())
+                    ("scalar", StandardScaler(with_mean=False))
                 ]
             )
 
