@@ -31,7 +31,7 @@ def evaluate_model(X_train, y_train, X_test, y_test, models):
             y_train_pred = model.predict(X_train)
             y_test_pred = model.predict(X_test)
             
-            train_r2_score = r2_score(y_test, y_train_pred)
+            train_r2_score = r2_score(y_train, y_train_pred)
             test_r2_score = r2_score(y_test, y_test_pred)
             
             report[item] = test_r2_score
