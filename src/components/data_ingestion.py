@@ -5,8 +5,7 @@ from src.logger import logging  # Import custom logging configuration
 from sklearn.model_selection import train_test_split
 from src.exception import CustomException  # Import custom exception class
 from src.components.data_transformation import DataTransformation
-from src.components.model_trainer import ModelTrianer
-from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
 
 # Define a dataclass to hold configuration paths
 @dataclass
@@ -67,5 +66,5 @@ if __name__ == "__main__":
     datatransform = DataTransformation()
     transformed_train, trandformed_test, _ = datatransform.initiate_data_transformation(train, test)
     
-    modeltrainer = ModelTrianer()
+    modeltrainer = ModelTrainer()
     print(modeltrainer.initiate_model_trainer(transformed_train, trandformed_test))
