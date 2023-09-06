@@ -1,27 +1,36 @@
 import pandas as pd
-
-
+from src.exception import CustomException
 from src.utils import load_object
 
+# Define a class for a prediction pipeline
 class PredictPipeline:
     def predict(self, feature):
         try:
+            # Define the file paths for the preprocessor and model artifacts
             preprocessor_path = "artifacts\preprocessor.pkl"
+            model_path = "artifacts\model.pkl"
+            
+            # Load the preprocessor object from the specified file path
             preprocessor = load_object(preprocessor_path)
+            
+            # Transform the input feature using the preprocessor
             preprocessed_data = preprocessor.transform(feature)
             
-            model_path = "artifacts\model.pkl"
+            # Load the model object from the specified file path
             model = load_object(model_path)
+            
+            # Make a prediction using the model and the preprocessed data
             prediction = model.predict(preprocessed_data)
             
-            return prediction
+            # Return the prediction result
+            return prediction[0]
         
         except Exception as e:
-            raise CusotmData(e)
-        
-        
-    
-class CusotmData:
+            # If an exception occurs, raise a CustomException with the original exception as its cause
+            raise CustomException(e)
+
+# Define a class for custom data
+class CustomData:
     def __init__(self, 
                 gender: str,
                 race_ethnicity: str,
@@ -41,6 +50,7 @@ class CusotmData:
         
     def data_to_dataframe(self):
         try:
+            # Create a dictionary with custom data attributes
             custom_data_input_dict = {
                 "gender": [self.gender],
                 "race_ethnicity": [self.race_ethnicity],
@@ -50,7 +60,10 @@ class CusotmData:
                 "reading_score": [self.reading_score],
                 "writing_score": [self.writing_score],
             }
+            
+            # Convert the dictionary to a pandas DataFrame
             return pd.DataFrame(custom_data_input_dict)
         
         except Exception as e:
-            raise CusotmData(e)
+            # If an exception occurs, raise a CustomData exception with the original exception as its cause
+            raise CustomException(e)
