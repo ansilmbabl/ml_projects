@@ -67,3 +67,17 @@ def evaluate_model(X_train, y_train, X_test, y_test, models, params):
     except Exception as e:
         # If an exception occurs, raise a custom exception with the error message
         raise CustomException(e)
+
+
+# Define a function to load an object from a file
+def load_object(file_path):
+    try:
+        # Try to open the file for reading in binary mode ("rb")
+        with open(file_path, "rb") as file:
+            # Deserialize the object from the file and return it
+            return pickle.load(file)
+        
+    except Exception as e:
+        # If an exception occurs (e.g., file not found or unpickling error),
+        # raise a custom exception called CustomException with the original exception as its cause
+        raise CustomException(e)
